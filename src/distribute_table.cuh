@@ -83,7 +83,7 @@ distribute_cols(
     std::size_t dtype_size = cudf::size_of(local_col.type());
 
     if (mpi_rank == 0) {
-        // master node
+        // main node
 
         cudf::size_type global_size = global_col.size();
         requests.resize(mpi_size);
@@ -101,7 +101,7 @@ distribute_cols(
             );
         }
 
-        // Fill master node's local_col
+        // Fill main node's local_col
 
         cudf::size_type rank0_size = get_local_table_size(global_size, 0, mpi_size);
 
@@ -207,7 +207,7 @@ distribute_table(
  *
  * This function needs to be called collectively by all ranks in MPI_COMM_WORLD.
  *
- * @param[in] table The table on each rank to be sent to the master rank. Significant on all ranks.
+ * @param[in] table The table on each rank to be sent to the main rank. Significant on all ranks.
  * @param[in] communicator An instance of `Communicator` used for communication.
  *
  * @return Merged table on the root rank. `nullptr` on all other ranks.

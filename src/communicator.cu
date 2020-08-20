@@ -49,7 +49,7 @@ void UCXCommunicator::initialize_ucx()
 
     memset(&ucp_worker_params, 0, sizeof(ucp_worker_params));
     ucp_worker_params.field_mask  = UCP_WORKER_PARAM_FIELD_THREAD_MODE;
-    ucp_worker_params.thread_mode = UCS_THREAD_MODE_SINGLE;  // only the master thread can access UCX
+    ucp_worker_params.thread_mode = UCS_THREAD_MODE_SINGLE;  // only the main thread can access UCX
 
     UCX_CALL(ucp_worker_create(ucp_context, &ucp_worker_params, &ucp_worker));
 
@@ -284,7 +284,7 @@ void UCXBufferCommunicator::initialize_ucx()
 
     memset(&ucp_worker_params, 0, sizeof(ucp_worker_params));
     ucp_worker_params.field_mask  = UCP_WORKER_PARAM_FIELD_THREAD_MODE;
-    ucp_worker_params.thread_mode = UCS_THREAD_MODE_SINGLE;  // only the master thread can access UCX
+    ucp_worker_params.thread_mode = UCS_THREAD_MODE_SINGLE;  // only the main thread can access UCX
 
     UCX_CALL(ucp_worker_create(ucp_context, &ucp_worker_params, &ucp_worker));
 
